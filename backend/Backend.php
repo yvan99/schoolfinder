@@ -1,6 +1,9 @@
 <?php
 //require vendor autoloader
 require('../vendor/autoload.php');
+
+use GuzzleHttp\Client;
+
 class Backend
 {
     public function connectDb()
@@ -19,8 +22,7 @@ class Backend
 
     public function getSchools($clientAddress, $schoolType, $schoolCategory)
     {
-        $connectBackend = new Backend;
-        $connectDb = $connectBackend->connectDb();
+        $connectDb = self::connectDb();
         $sql = "SELECT * FROM schools WHERE school_shotype='$schoolType' AND school_category='$schoolCategory'";
         $stmt = $connectDb->prepare($sql);
         $stmt->execute();
@@ -29,6 +31,10 @@ class Backend
         $original_data = json_decode($responseJson, true);
         $features = array();
         foreach ($original_data as $key => $value) {
+
+            // use distance matrix api to get nearest locations
+            $callDistanceMatrix = self::getDistanceMatrix($clientAddress, $value['school_address']);
+            if ($callDistanceMatrix <= 4) {
             $features[] = array(
                 'type' => 'Feature',
                 'properties' => array('Name' => $value['school_name'], 'garageId' => $value['school_id'], 'Address' => $value['school_address'], 'Status' => 'Operational'),
@@ -41,7 +47,8 @@ class Backend
                     ),
                 ),
             );
-        }
+            } 
+           }
         $final_data = json_encode($features);
         session_start();
         $_SESSION["schools"] = $final_data;
@@ -51,28 +58,22 @@ class Backend
     public function getDistanceMatrix($origin, $destination)
     {
         // set up API key and URL
-        $apiKey = "YOUR_API_KEY";
-        $url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial";
+        $apiKey = getenv("GOOGLE_PLACES_API");
 
         // set up origin and destination coordinates
-        $origin = "origin=41.43206,-81.38992";
-        $destination = "destination=41.4993,-81.6944";
+        $origin = "origins=" . $origin; // long,lat
+        $destination = "destinations=" . $destination;
 
         // build the full URL with API key and coordinates
-        $fullUrl = $url . "&" . $origin . "&" . $destination . "&key=" . $apiKey;
-
-        // make the API request
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $fullUrl);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        // decode the JSON response
-        $data = json_decode($response, true);
-
-        // print the distance and duration
-        echo "Distance: " . $data['rows'][0]['elements'][0]['distance']['text'] . "<br>";
-        echo "Duration: " . $data['rows'][0]['elements'][0]['duration']['text'] . "<br>";
+        $client = new Client();
+        $response = $client->request('GET', 'https://maps.googleapis.com/maps/api/distancematrix/json', [
+            'query' => [
+                'origins' => $origin,
+                'destinations' => $destination,
+                'key' => $apiKey
+            ]
+        ]);
+        $data = json_decode($response->getBody(), true);
+        return substr($data['rows'][0]['elements'][0]['distance']['text'], 0, -2);
     }
 }

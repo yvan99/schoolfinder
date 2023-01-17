@@ -12,6 +12,7 @@
         }
     ],
     "require": {
-        "divineomega/dotenv-loader": "^2.0"
+        "divineomega/dotenv-loader": "^2.0",
+        "guzzlehttp/guzzle": "^7.5"
     }
 }
