@@ -1,6 +1,6 @@
 <?php
 //require vendor autoloader
-require('./vendor/autoload.php');
+require('../vendor/autoload.php');
 class Backend
 {
     public function connectDb()

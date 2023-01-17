@@ -9,7 +9,7 @@
         };
 
         let input = document.getElementById('locationTextField');
-        let autocomplete = new google.maps.places.Autocomplete(input);
+        let autocomplete = new google.maps.places.Autocomplete(input,options);
     }
     google.maps.event.addDomListener(window, 'load', googlePlacesInit);
 </script>
