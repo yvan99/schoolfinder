@@ -48,7 +48,31 @@ class Backend
         header('location:../find.php');
     }
 
-    public function getDistanceMatrix($origin,$destination){
-        
+    public function getDistanceMatrix($origin, $destination)
+    {
+        // set up API key and URL
+        $apiKey = "YOUR_API_KEY";
+        $url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial";
+
+        // set up origin and destination coordinates
+        $origin = "origin=41.43206,-81.38992";
+        $destination = "destination=41.4993,-81.6944";
+
+        // build the full URL with API key and coordinates
+        $fullUrl = $url . "&" . $origin . "&" . $destination . "&key=" . $apiKey;
+
+        // make the API request
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $fullUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        // decode the JSON response
+        $data = json_decode($response, true);
+
+        // print the distance and duration
+        echo "Distance: " . $data['rows'][0]['elements'][0]['distance']['text'] . "<br>";
+        echo "Duration: " . $data['rows'][0]['elements'][0]['duration']['text'] . "<br>";
     }
 }
