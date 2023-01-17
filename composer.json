@@ -1,0 +1,17 @@
+{
+    "name": "ishim/map",
+    "autoload": {
+        "psr-4": {
+            "Ishim\\Map\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "yvan99",
+            "email": "ishimweyvan90@gmail.com"
+        }
+    ],
+    "require": {
+        "divineomega/dotenv-loader": "^2.0"
+    }
+}

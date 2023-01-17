@@ -1,8 +1,8 @@
 <?php
-
+//require vendor autoloader
+require('./vendor/autoload.php');
 class Backend
 {
-
     public function connectDb()
     {
         define('DB_HOST', 'localhost');
