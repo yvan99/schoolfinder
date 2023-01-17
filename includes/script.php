@@ -1,4 +1,5 @@
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=AIzaSyDpuMMt3CR3XvDhPy1do7Q1KMY0q2G0WOc"></script>
+<?php require_once 'vendor/autoload.php';?>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&key=<?php echo getenv("GOOGLE_PLACES_API");?>"></script>
 <script>
     const googlePlacesInit=()=> {
         // restrict googlePlaces to Rwanda places
