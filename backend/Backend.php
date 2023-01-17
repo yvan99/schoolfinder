@@ -47,4 +47,8 @@ class Backend
         $_SESSION["schools"] = $final_data;
         header('location:../find.php');
     }
+
+    public function getDistanceMatrix($origin,$destination){
+        
+    }
 }
