@@ -1,10 +1,10 @@
 <script>
     let map = L.map('map');
-    let garages = <?php echo $_SESSION["schools"]; ?>;
+    let schoolsData = <?php echo $_SESSION["schools"]; ?>;
 
     function onEachFeature(feature, layer) {
         let popupContent =
-            `<img src=../garagephoto/${feature.properties.Image}><b> ${feature.properties.Name}</b><p>${feature.properties.Address}</p><a href="/service-request/${feature.properties.garageId}" class="carte-button text-dark"> Request service</a>`;
+            `<img src=../photo/${feature.properties.Image}><b> ${feature.properties.Name}</b><p>${feature.properties.Address}</p>`;
         if (feature.properties && feature.properties.popupContent) {
             popupContent += feature.properties.popupContent;
         }
@@ -21,7 +21,7 @@
             tileSize: 512,
             zoomOffset: -1,
         }).addTo(map);
-    L.geoJson(garages, {
+    L.geoJson(schoolsData, {
         onEachFeature: onEachFeature
     }).addTo(map);
 </script>

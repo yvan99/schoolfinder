@@ -3,7 +3,6 @@
 require('../vendor/autoload.php');
 
 use GuzzleHttp\Client;
-
 class Backend
 {
     public function connectDb()
@@ -34,7 +33,7 @@ class Backend
 
             // use distance matrix api to get nearest locations
             $callDistanceMatrix = self::getDistanceMatrix($clientAddress, $value['school_address']);
-            if ($callDistanceMatrix <= 4) {
+            if ($callDistanceMatrix <= getenv("NEAREST_PLACE_RATIO") ) {
             $features[] = array(
                 'type' => 'Feature',
                 'properties' => array('Name' => $value['school_name'], 'garageId' => $value['school_id'], 'Address' => $value['school_address'], 'Status' => 'Operational'),
