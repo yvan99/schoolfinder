@@ -1,5 +1,6 @@
 <script>
     let map = L.map('map');
+    // get schools info from session
     let schoolsData = <?php echo $_SESSION["schools"]; ?>;
 
     function onEachFeature(feature, layer) {

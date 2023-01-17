@@ -2,7 +2,7 @@
 //require vendor autoloader
 require('../vendor/autoload.php');
 
-use GuzzleHttp\Client;
+use GuzzleHttp\Client; // guzzle helps to make api request
 class Backend
 {
     public function connectDb()
@@ -10,7 +10,7 @@ class Backend
         define('DB_HOST', 'localhost');
         define('DB_USER', 'root');
         define('DB_PASS', '');
-        define('DB_NAME', 'finder');
+        define('DB_NAME', getenv("DATABASE_NAME"));
 
         try {
             return new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
@@ -36,7 +36,7 @@ class Backend
             if ($callDistanceMatrix <= getenv("NEAREST_PLACE_RATIO") ) {
             $features[] = array(
                 'type' => 'Feature',
-                'properties' => array('Name' => $value['school_name'], 'garageId' => $value['school_id'], 'Address' => $value['school_address'], 'Status' => 'Operational'),
+                'properties' => array('Name' => $value['school_name'], 'schoolId' => $value['school_id'], 'Address' => $value['school_address'], 'Status' => 'Operational'),
                 'geometry' => array(
                     'type' => 'Point',
                     'coordinates' => array(
