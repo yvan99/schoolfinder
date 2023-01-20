@@ -6,7 +6,11 @@ session_start();
 ?>
 
 <link rel="stylesheet" href="assets/css/find.css">
-
+<style>
+    body{
+        text-transform: capitalize !important;
+    }
+</style>
 <div class="container">
 <form action="backend/forms.php" method="post">
     <div class="row height d-flex justify-content-center align-items-center col-12 row">

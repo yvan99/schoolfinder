@@ -5,12 +5,12 @@
 
     function onEachFeature(feature, layer) {
         let popupContent =
-            `<b> ${feature.properties.Name}</b><br/>
-             <p>${feature.properties.Address}</p><br/>
-             <p>${feature.properties.District}</p><br/>
-             <p>${feature.properties.Sector}</p><br/>
-             <p>${feature.properties.Cell}</p><br/>
-             <p>${feature.properties.Village}</p><br/> 
+            `<b> ${feature.properties.Name}</b>
+             <p>${feature.properties.Address}</p>
+             <p>${feature.properties.District}</p>
+             <p>${feature.properties.Sector}</p>
+             <p>${feature.properties.Cell}</p>
+             <p>${feature.properties.Village}</p> 
              `;
         if (feature.properties && feature.properties.popupContent) {
             popupContent += feature.properties.popupContent;
