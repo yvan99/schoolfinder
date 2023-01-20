@@ -33,21 +33,30 @@ class Backend
 
             // use distance matrix api to get nearest locations
             $callDistanceMatrix = self::getDistanceMatrix($clientAddress, $value['school_address']);
-            if ($callDistanceMatrix <= getenv("NEAREST_PLACE_RATIO") ) {
-            $features[] = array(
-                'type' => 'Feature',
-                'properties' => array('Name' => $value['school_name'], 'schoolId' => $value['school_id'], 'Address' => $value['school_address'], 'Status' => 'Operational'),
-                'geometry' => array(
-                    'type' => 'Point',
-                    'coordinates' => array(
-                        $value['school_lon'],
-                        $value['school_lat'],
-                        1
+            if ($callDistanceMatrix <= getenv("NEAREST_PLACE_RATIO")) {
+                $features[] = array(
+                    'type' => 'Feature',
+                    'properties' => array(
+                        'Name' => $value['school_name'],
+                        'schoolId' => $value['school_id'],
+                        'District' => $value['district'],
+                        'Sector' => $value['sector'],
+                        'Cell' => $value['cell'],
+                        'Village' => $value['village'],
+                        'Address' => $value['school_address'],
+                        'Status' => 'Operational'
                     ),
-                ),
-            );
-            } 
-           }
+                    'geometry' => array(
+                        'type' => 'Point',
+                        'coordinates' => array(
+                            $value['school_lon'],
+                            $value['school_lat'],
+                            1
+                        ),
+                    ),
+                );
+            }
+        }
         $final_data = json_encode($features);
         session_start();
         $_SESSION["schools"] = $final_data;

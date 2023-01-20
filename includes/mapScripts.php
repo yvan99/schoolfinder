@@ -5,7 +5,13 @@
 
     function onEachFeature(feature, layer) {
         let popupContent =
-            `<img src=../photo/${feature.properties.Image}><b> ${feature.properties.Name}</b><p>${feature.properties.Address}</p>`;
+            `<b> ${feature.properties.Name}</b><br/>
+             <p>${feature.properties.Address}</p><br/>
+             <p>${feature.properties.District}</p><br/>
+             <p>${feature.properties.Sector}</p><br/>
+             <p>${feature.properties.Cell}</p><br/>
+             <p>${feature.properties.Village}</p><br/> 
+             `;
         if (feature.properties && feature.properties.popupContent) {
             popupContent += feature.properties.popupContent;
         }
