@@ -11,7 +11,7 @@ session_start();
         text-transform: capitalize !important;
     }
 </style>
-<div class="container">
+<div class="container mb-3">
 <form action="backend/forms.php" method="post">
     <div class="row height d-flex justify-content-center align-items-center col-12 row">
         <span class="mb-2 h3">Find Nearest School</span>
