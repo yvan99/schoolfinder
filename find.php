@@ -55,6 +55,7 @@ session_start();
 
 <?php
 // call css file
+require_once ('includes/footer.php');
 require_once('includes/script.php');
 ?>
 <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"></script>
