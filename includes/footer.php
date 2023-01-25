@@ -1,4 +1,4 @@
-<footer class="container-fluid p-4 rounded">
+<footer class="container-fluid p-3 bg-dark text-white">
       <div class="d-lg-flex justify-content-between">
         <div>
           <span>SCHOOL FINDER SYSTEM</span>
