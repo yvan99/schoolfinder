@@ -82,6 +82,15 @@ class Backend
             ]
         ]);
         $data = json_decode($response->getBody(), true);
-        return substr($data['rows'][0]['elements'][0]['distance']['text'], 0, -2);
+        if ($data['status'] == 'OK') {
+            $countResults = count($data);
+            if ($countResults >=1){
+                return preg_replace('/\d/', '', $data['rows'][0]['elements'][0]['distance']['text']);
+            }
+
+        } else {
+            die("Failed to find distance");
+            exit();
+        }
     }
 }

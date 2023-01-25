@@ -15,23 +15,23 @@ session_start();
 <form action="backend/forms.php" method="post">
     <div class="row height d-flex justify-content-center align-items-center col-12 row">
         <span class="mb-2 h3">Find Nearest School</span>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="form mt-3">
                 <i class="fa fa-search"></i>
                 <input type="text" name="user_address" id="locationTextField" class="form-control form-input" placeholder="Tell Us where you are...">
                 <!-- <span class="left-pan"><i class="fa fa-microphone"></i></span> -->
             </div>
         </div>
-        <div class="col-md-3">
-            <select name="schoolType"  class="form-control form-input mt-3 form-select">
+        <div class="col-md-2">
+            <select name="schoolType"  class="form-control form-inpute mt-3 form-select">
                 <option selected disabled>Select school type</option>
                 <option value="private" >Private</option>
                 <option value="public" >Public</option>
             </select>
         </div>
 
-        <div class="col-md-3">
-            <select name="schoolCategory"  class="form-control form-input mt-3 form-select">
+        <div class="col-md-2">
+            <select name="schoolCategory"  class="form-control form-inpute mt-3 form-select">
                 <option selected disabled>Select school type</option>
                 <option value="primary" >Primary school</option>
                 <option value="nursery" >Nursery school</option>
@@ -39,14 +39,15 @@ session_start();
         </div>
 
 
-        <div class="col-md-3">
-            <button type="submit" name="request" class="btn btn-primary form-input mt-3">Find Nearest Schools</button>
+        <div class="col-md-4">
+            <button type="submit" name="request" class="btn btn-primary mt-3 form-inpute">Find Schools</button>
+            <a href="includes/clearcache.php" class="btn btn-danger mt-3 form-inpute">Clear Search</a>
         </div>
 
     </div>
     </form>
 
-    <div id="map"style="width: 93%; height: 100vh;"></div>
+    <div id="map"style="width: 93%; height: 100vh;border-radius:10px"></div>
     
 
 </div>

@@ -42,9 +42,13 @@ body{
 }
 
 .form-input{
-
     height: 55px;
     text-indent: 33px;
+    border-radius: 10px;
+}
+.form-inpute{
+    height: 55px;
+    text-indent: 0px !important;
     border-radius: 10px;
 }
 

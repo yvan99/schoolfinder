@@ -2,6 +2,14 @@
     let map = L.map('map');
     // get schools info from session
     let schoolsData = <?php echo $_SESSION["schools"]; ?>;
+    let myIcon = L.icon({
+        iconUrl: 'assets/img/high-school.png',
+        iconSize: [50, 50], // width and height of the image in pixels
+        shadowSize: [35, 20], // width, height of optional shadow image
+        iconAnchor: [12, 12], // point of the icon which will correspond to marker's location
+        shadowAnchor: [12, 6], // anchor point of the shadow. should be offset
+        popupAnchor: [0, 0] // point from which the popup should open relative to the iconAnchor
+    })
 
     function onEachFeature(feature, layer) {
         let popupContent =
@@ -17,7 +25,7 @@
         }
         layer.bindPopup(popupContent);
     }
-    map.setView([-1.882914, 30.144405], 9.5);
+    map.setView([-1.99095,30.02127], 9.5); // point to NYARUGENGE DISTRICT
     mapLink =
         '<a href="http://openstreetmap.org">OpenStreetMap</a>';
     L.tileLayer(
@@ -28,7 +36,13 @@
             tileSize: 512,
             zoomOffset: -1,
         }).addTo(map);
+
     L.geoJson(schoolsData, {
+        pointToLayer: (feature, latlng) => {
+            return L.marker(latlng, {
+                icon: myIcon
+            });
+        },
         onEachFeature: onEachFeature
     }).addTo(map);
 </script>
